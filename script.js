@@ -1,4 +1,4 @@
-let startTime = 0; 
+let startTime = 0;
 let trials = [];
 let trial = 1;
 let lives = 3;
@@ -47,8 +47,8 @@ function startGame() {
   lives = 3;
   updateLives();
 
-  session++; // new session
-  trial = trials.length + 1; // continue counting
+  session++;      // new session
+  trial = 1;      // reset trial per session
 
   gameRunning = true;
   startTime = performance.now();
@@ -65,17 +65,18 @@ target.addEventListener("click", (e) => {
   const mt = (performance.now() - startTime).toFixed(1);
 
   trials.push({
-    session,
+    session: session,
     trial: trial++,
     MT: mt
   });
 
   info.innerText = `⏱ ${mt} ms`;
 
+  // restart timer for next click
   startTime = performance.now();
 });
 
-//-----------add touch screen------
+// ---------- TOUCH SUPPORT (FIXED - NO DUPLICATES) ----------
 target.addEventListener("touchstart", (e) => {
   e.preventDefault();
   target.click();
@@ -88,18 +89,9 @@ ghosts.forEach(g => {
   });
 });
 
-ghosts.forEach(g => {
-  g.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    g.click();
-  });
-});
-
 // ---------- LIVES ----------
 function updateLives() {
   livesCount.innerText = lives;
-  // hearts:
-  // livesCount.innerText = "❤️".repeat(lives);
 }
 
 function loseLife() {
@@ -133,7 +125,7 @@ game.addEventListener("click", (e) => {
   }
 });
 
-// ---------- CSV ----------
+// ---------- CSV DOWNLOAD ----------
 function downloadCSV() {
   let csv = "session,trial,MT\n";
 
