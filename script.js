@@ -39,7 +39,7 @@ function moveTarget() {
     if (gameRunning) {
       randomMove(target);
     }
-  }, 9000);
+  }, 2000);
 }
 
 // ---------- START GAME ----------
