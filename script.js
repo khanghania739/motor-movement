@@ -76,19 +76,6 @@ target.addEventListener("click", (e) => {
   startTime = performance.now();
 });
 
-// ---------- TOUCH SUPPORT (FIXED - NO DUPLICATES) ----------
-target.addEventListener("touchstart", (e) => {
-  e.preventDefault();
-  target.click();
-});
-
-ghosts.forEach(g => {
-  g.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    g.click();
-  });
-});
-
 // ---------- LIVES ----------
 function updateLives() {
   livesCount.innerText = lives;
